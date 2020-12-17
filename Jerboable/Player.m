@@ -11,7 +11,7 @@
 #import "SKTUtils.h"
 
 @implementation Player
-//2
+
 - (instancetype)initWithImageNamed:(NSString *)name {
   if (self == [super initWithImageNamed:name]) {
     self.velocity = CGPointMake(0.0, 0.0);
@@ -23,33 +23,28 @@
 {
   CGPoint gravity = CGPointMake(0.0, -450.0);
   CGPoint gravityStep = CGPointMultiplyScalar(gravity, delta);
-  //1
   CGPoint forwardMove = CGPointMake(800.0, 0.0);
   CGPoint forwardMoveStep = CGPointMultiplyScalar(forwardMove, delta);
 
   self.velocity = CGPointAdd(self.velocity, gravityStep);
-  //2
   self.velocity = CGPointMake(self.velocity.x * 0.9, self.velocity.y);
-  //3
+
     CGPoint jumpForce = CGPointMake(0.0, 310.0);
     float jumpCutoff = 150.0;
 
-//    if (self.mightAsWellJump && self.onGround) {
-//      self.velocity = CGPointAdd(self.velocity, jumpForce);
-//    } else if (!self.mightAsWellJump && self.velocity.y > jumpCutoff) {
-//      self.velocity = CGPointMake(self.velocity.x, jumpCutoff);
-//    }
+    //handles jumping
     if (self.mightAsWellJump && self.onGround) {
         self.velocity = CGPointAdd(self.velocity, jumpForce);
+        //Absolutely crucial to have arcade jumpy noises
         [self runAction:[SKAction playSoundFileNamed:@"jumpy.wav" waitForCompletion:NO]];
     } else if (!self.mightAsWellJump && self.velocity.y > jumpCutoff) {
         self.velocity = CGPointMake(self.velocity.x, jumpCutoff);
     }
     
+    //Handles movement behavior
   if (self.forwardMarch) {
     self.velocity = CGPointAdd(self.velocity, forwardMoveStep);
   }
-  //4
   CGPoint minMovement = CGPointMake(0.0, -450);
   CGPoint maxMovement = CGPointMake(120.0, 250.0);
   self.velocity = CGPointMake(Clamp(self.velocity.x, minMovement.x, maxMovement.x), Clamp(self.velocity.y, minMovement.y, maxMovement.y));

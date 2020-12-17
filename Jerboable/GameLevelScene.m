@@ -41,26 +41,25 @@
   self.player.zPosition = 15;
   [self.map addChild:self.player];
   
+  //Epic gamer music
   [[SKTAudio sharedInstance] playBackgroundMusic:@"potc.mp3"];
   self.userInteractionEnabled = YES;
 
   return self;
 }
 
-//1
 - (void)update:(NSTimeInterval)currentTime
 {
   if (self.gameOver) return;
 
-  //2
   NSTimeInterval delta = currentTime - self.previousUpdateTime;
-  //3
+  
   if (delta > 0.02) {
     delta = 0.02;
   }
-  //4
+  
   self.previousUpdateTime = currentTime;
-  //5
+  
   [self.player update:delta];
   
   [self checkForAndResolveCollisionsForPlayer:self.player forLayer:self.walls];
@@ -85,7 +84,7 @@
 - (void)checkForAndResolveCollisionsForPlayer:(Player *)player forLayer:(TMXLayer *)layer
 {
   NSInteger indices[8] = {7, 1, 3, 5, 0, 2, 6, 8};
-  player.onGround = NO;  ////Here
+  player.onGround = NO;
   for (NSUInteger i = 0; i < 8; i++) {
     NSInteger tileIndex = indices[i];
     
@@ -103,35 +102,32 @@
     NSInteger gid = [self tileGIDAtTileCoord:tileCoord forLayer:layer];
     if (gid != 0) {
       CGRect tileRect = [self tileRectFromTileCoords:tileCoord];
-      //NSLog(@"GID %ld, Tile Coord %@, Tile Rect %@, player rect %@", (long)gid, NSStringFromCGPoint(tileCoord), NSStringFromCGRect(tileRect), NSStringFromCGRect(playerRect));
-      //1
+     
       if (CGRectIntersectsRect(playerRect, tileRect)) {
         CGRect intersection = CGRectIntersection(playerRect, tileRect);
         //2
         if (tileIndex == 7) {
-          //tile is directly below Koala
+          //tile is directly below character
           player.desiredPosition = CGPointMake(player.desiredPosition.x, player.desiredPosition.y + intersection.size.height);
-          player.velocity = CGPointMake(player.velocity.x, 0.0); ////Here
-          player.onGround = YES; ////Here
+          player.velocity = CGPointMake(player.velocity.x, 0.0);
+          player.onGround = YES;
         } else if (tileIndex == 1) {
-          //tile is directly above Koala
+          //tile is directly above character
           player.desiredPosition = CGPointMake(player.desiredPosition.x, player.desiredPosition.y - intersection.size.height);
         } else if (tileIndex == 3) {
-          //tile is left of Koala
+          //tile is left of character
           player.desiredPosition = CGPointMake(player.desiredPosition.x + intersection.size.width, player.desiredPosition.y);
         } else if (tileIndex == 5) {
-          //tile is right of Koala
+          //tile is right of character
           player.desiredPosition = CGPointMake(player.desiredPosition.x - intersection.size.width, player.desiredPosition.y);
-          //3
         } else {
           if (intersection.size.width > intersection.size.height) {
             //tile is diagonal, but resolving collision vertically
-            //4
-            player.velocity = CGPointMake(player.velocity.x, 0.0); ////Here
+            player.velocity = CGPointMake(player.velocity.x, 0.0);
             float intersectionHeight;
             if (tileIndex > 4) {
               intersectionHeight = intersection.size.height;
-              player.onGround = YES; ////Here
+              player.onGround = YES;
             } else {
               intersectionHeight = -intersection.size.height;
             }
@@ -144,14 +140,13 @@
             } else {
               intersectionWidth = -intersection.size.width;
             }
-            //5
+          
             player.desiredPosition = CGPointMake(player.desiredPosition.x  + intersectionWidth, player.desiredPosition.y);
           }
         }
       }
     }
   }
-  //6
   player.position = player.desiredPosition;
 }
 
@@ -236,10 +231,12 @@
 }
 
 -(void)gameOver:(BOOL)won {
-  //1
+  
   self.gameOver = YES;
+  
+  //door sound for door death hehe
   [self runAction:[SKAction playSoundFileNamed:@"door_sound.wav" waitForCompletion:NO]];
-  //2
+  
   NSString *gameText;
   if (won) {
     gameText = @"Vic-door-y!";
@@ -247,14 +244,12 @@
     gameText = @"Game Over!";
   }
   
-  //3
   SKLabelNode *endGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Marker Felt"];
   endGameLabel.text = gameText;
   endGameLabel.fontSize = 40;
   endGameLabel.position = CGPointMake(self.size.width / 2.0, self.size.height / 1.7);
   [self addChild:endGameLabel];
-  
-  //4
+
   UIButton *replay = [UIButton buttonWithType:UIButtonTypeCustom];
   replay.tag = 321;
   UIImage *replayImage = [UIImage imageNamed:@"replay"];
@@ -266,9 +261,8 @@
 
 - (void)replay:(id)sender
 {
-  //5
   [[self.view viewWithTag:321] removeFromSuperview];
-  //6
+
   [self.view presentScene:[[GameLevelScene alloc] initWithSize:self.size]];
 }
 
