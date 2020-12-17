@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="212" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" name="tileSet-hd" tilewidth="16" tileheight="16" tilecount="256" columns="16">
+  <image source="tileSet.png" trans="fe80fe" width="256" height="256"/>
+ </tileset>
+ <layer id="1" name="background" width="212" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt2U1uwyAQhmEOWqkHaKNmnSx8gOYG7SY/F2jaA3Yk1xILJyLjGVyG95E+xVIcg8AEY1IafUmukm/JTyqj+Y3HNeYMylhYqy2119eW7VFn73ZopQ61vUsOBecNDx4vKQto1Yfks+A8i/FUWhYQncV40vKa15gv5x0lJ8lZclmp7Bz9ZMtrXlt6XU0/W96rXvf9knWPtk7Tf/FUdo7nmj5o+tlyjf4f1/uaOlm/xwJ65fVuGJgTee1gsd8SuX1gL+rawWr/Mmr7ABrDjc8ccxBQpmQ8MQcBZUrGE9AS7+eppzvfMZ4Qjefz1IvkVbJJ83u8vY0n1oJx1O7LnWSfxv3dPJM3yfYvz9nxtmIda2MtGEevfXlrPFtree5pue6IqeX/q5brjn55z5EAAF+/JouCLA==
+  </data>
+ </layer>
+ <layer id="2" name="walls" width="212" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztmjtOxDAURadhB8AG+Lf8KfnT89kB7ABaKmighQYaYDbAzCyQW8yIKDxsPyfk2eYe6SjSxNFcyX5PiZNejxBCCCGEEEJIV7zBd/hROfY9431jJB7goyLTrVJC6kwZ/OcnHIwdjo8jz/ihZ4zEC3z95Vy91qRMA8dv1TzV/lCv+dhzml5A0mAazsBZ6yAGuGpNy6QWpZqPPafJJ9WlVI+s0b9jDs7DBbgIl+AyXLEM1RDfeil1PUl1KdVjmz2EfLMK1+A63ICbcAtuwx3DXE3xrZdS1lOpfSFHduEe3IcH8BAewWN4YpiLhJNaX5D2l3xH7d5S6pzCM3gOL4yzxOB6lifdUt3LkfZwXHs5pXEJr6xDROB6lifEimt4Yx2CJAXv3+K5g/fWIQont/XJ+7d4nuCzdYhAcluXE7g+f9LGXPq+swl9l64Z0/bRkv++LjXz24+4psse1MZc+r6zCXmX7vpGJyajdnwTUp3bUKzza+Z3FHFNiT2oZHKf29zzk/Sw7tFNyT0/KYvce3Tu+UlZfAF1A1S7
+  </data>
+ </layer>
+ <layer id="3" name="hazards" width="212" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt2qENAAAIA8HurxgZgSZokjv3E9Q0AQCA/+poAAAAAAAAAAAA+KziGwcAGzsJADAaEhUDYQ==
+  </data>
+ </layer>
+</map>
